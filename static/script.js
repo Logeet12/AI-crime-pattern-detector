@@ -9,23 +9,36 @@ async function generateDataset() {
  
     displayTable(data, "datasetContainer");
  
-    // Show Analyse button below the dataset
     document.getElementById("analyzeBtn").classList.remove("hidden");
  
-    // Clear any previous analysis when regenerating
+    // Clear previous analysis and charts
     document.getElementById("analysisContainer").innerHTML = "";
+    document.getElementById("chartsSection").classList.add("hidden");
 }
  
-// Analyze Dataset
+// Analyze Dataset + Load Charts
 async function analyzeCrime() {
+    // 1. Fetch analysed table
     const res = await fetch("/analyze");
     const data = await res.json();
- 
-    // Display analysed table below the Analyse button
     displayTable(data, "analysisContainer");
+ 
+    // 2. Fetch and display EDA charts
+    const chartRes = await fetch("/charts");
+    const charts = await chartRes.json();
+ 
+    const keys = ["correlation", "top_suspects", "distribution", "scatter"];
+    keys.forEach(key => {
+        const img = document.getElementById(`chart-${key}`);
+        if (img && charts[key]) {
+            img.src = charts[key];
+        }
+    });
+ 
+    document.getElementById("chartsSection").classList.remove("hidden");
 }
  
-// Display Table Function
+// Display Table
 function displayTable(data, containerId) {
     if (!data || data.length === 0) {
         document.getElementById(containerId).innerHTML = "<p>No data available.</p>";
@@ -33,14 +46,11 @@ function displayTable(data, containerId) {
     }
  
     let table = "<table><tr>";
- 
-    // Headers
     for (let key in data[0]) {
         table += `<th>${key}</th>`;
     }
     table += "</tr>";
  
-    // Rows
     data.forEach(row => {
         table += "<tr>";
         for (let key in row) {
@@ -50,6 +60,5 @@ function displayTable(data, containerId) {
     });
  
     table += "</table>";
- 
     document.getElementById(containerId).innerHTML = table;
 }
