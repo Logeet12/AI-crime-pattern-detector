@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Crime Pattern Detector</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+ 
+<!-- Navbar -->
+<nav class="navbar">
+    <h1>AI Crime-Pattern Detector</h1>
+    <button onclick="toggleAbout()">About Us</button>
+</nav>
+ 
+<!-- About Section (hidden by default, shown on click) -->
+<div id="about" class="about hidden">
+    <p>
+        Our AI Crime Pattern Detector uses synthetic data generation, preprocessing,
+        and constraint-based logic (CSP) to analyze suspects. It evaluates parameters
+        like motive strength, alibi, evidence, distance, and witness reports to
+        identify potential high-risk individuals and uncover crime patterns. 
+        We don't eliminate suspects with low score but reduce the chance of them 
+        being the culprit.
+    </p>
+</div>
+ 
+<!-- Main Body -->
+<div class="container">
+ 
+    <!-- Generate Button (centred) -->
+    <button class="main-btn" onclick="generateDataset()">
+        Generate Dataset
+    </button>
+ 
+    <!-- Generated Dataset Table -->
+    <div id="datasetContainer"></div>
+ 
+    <!-- Analyse Button (appears below dataset after generation) -->
+    <button id="analyzeBtn" class="main-btn hidden" onclick="analyzeCrime()">
+        Analyse Dataset
+    </button>
+ 
+    <!-- Analysed Dataset Table (appears below Analyse button) -->
+    <div id="analysisContainer"></div>
+ 
+</div>
+ 
+<script src="/static/script.js"></script>
+</body>
+</html>
