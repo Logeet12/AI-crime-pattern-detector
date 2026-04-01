@@ -174,3 +174,4 @@ if __name__ == "__main__":
     port = 5000
     print(f"\n✅  Server running →  http://{host}:{port}\n")
     serve(app, host=host, port=port)
+ 
