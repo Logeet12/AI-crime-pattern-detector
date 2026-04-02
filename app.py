@@ -19,7 +19,7 @@ _cleaned_df = None
 def build_dataset():
     """Generate and preprocess 20 suspects. Returns raw list and cleaned DataFrame."""
     suspects = []
-    for i in range(20):
+    for i in range(10):
         suspects.append({
             "suspect_name": f"Suspect_{i+1}",
             "distance_from_scene": round(random.uniform(0.1, 10), 2),
